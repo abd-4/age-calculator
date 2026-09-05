@@ -1,0 +1,17 @@
+{
+  "background_color": "#21344e",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "الحاسبة الذكية للعمر",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "حاسبة عبدالقادر",
+  "start_url": "/",
+  "theme_color": "#1c3656",
+  "description": "تطبيق ذكي وعصري لحساب العمر بدقة متناهية بالسنوات والأشهر والأيام، مع حساب إجمالي الأيام ومعرفة يوم الميلاد والوقت المتبقي لعيد الميلاد القادم بتصميم أنيق واحترافي.",
+  "id": "com.abdalqadr.agecalculator",
+  "categories": [
+    "lifestyle",
+    "medical"
+  ]
+}
