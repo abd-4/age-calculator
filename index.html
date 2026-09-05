@@ -6,8 +6,8 @@
     <title>الحاسبة الذكية للعمر</title>
     <style>
         body {
-            background: linear-gradient(135deg, #090d16 0%, #111827 100%);
-            color: #f3f4f6;
+            background-color: #0f172a;
+            color: #f1f5f8;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
@@ -15,17 +15,7 @@
             justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
-            padding-top: 20px;
-            overflow-x: hidden;
-        }
-        #confetti-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
+            padding-top: 25px;
         }
         .container {
             width: 100%;
@@ -35,15 +25,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 2;
         }
         .lbl-title {
             font-size: 17px;
             font-weight: bold;
-            background: linear-gradient(90deg, #38bdf8, #c084fc, #fbbf24);
+            background: linear-gradient(135deg, #38bdf8, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 22px;
+            margin-bottom: 25px;
             text-align: center;
         }
         .frame-inputs {
@@ -58,50 +47,50 @@
             flex-direction: column;
             align-items: center;
             flex: 1;
-            background: rgba(31, 41, 55, 0.7);
+            background-color: #1e293b;
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid #374151;
+            border: 1px solid #334155;
         }
-        .sub-frame:nth-child(1) { border-top: 3px solid #38bdf8; }
-        .sub-frame:nth-child(2) { border-top: 3px solid #c084fc; }
-        .sub-frame:nth-child(3) { border-top: 3px solid #fbbf24; }
-        
+        .sub-frame:nth-child(1) { border-top: 3px solid #10b981; } /* Day - Emerald */
+        .sub-frame:nth-child(2) { border-top: 3px solid #a855f7; } /* Month - Purple */
+        .sub-frame:nth-child(3) { border-top: 3px solid #0ea5e9; } /* Year - Sky Blue */
+
         .sub-frame label {
             font-size: 13px;
             font-weight: bold;
-            color: #e5e7eb;
-            margin-bottom: 6px;
+            color: #94a3b8;
+            margin-bottom: 8px;
         }
         .sub-frame input {
             width: 100%;
             padding: 6px;
             font-size: 16px;
             text-align: center;
-            background-color: #111827;
-            border: 2px solid #4b5563;
+            background-color: #0f172a;
+            border: 2px solid #475569;
             color: #ffffff;
             border-radius: 6px;
             outline: none;
             box-sizing: border-box;
         }
-        .sub-frame input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
-        }
+        .sub-frame:nth-child(1) input:focus { border-color: #10b981; }
+        .sub-frame:nth-child(2) input:focus { border-color: #a855f7; }
+        .sub-frame:nth-child(3) input:focus { border-color: #0ea5e9; }
+
         .btn-calc {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
             color: #ffffff;
             font-size: 15px;
             font-weight: bold;
             border: none;
-            padding: 12px 0;
+            padding: 12px;
             border-radius: 8px;
             cursor: pointer;
             margin-bottom: 20px;
             width: 100%;
             box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
-            transition: transform 0.1s ease;
+            transition: transform 0.2s;
         }
         .btn-calc:active {
             transform: scale(0.98);
@@ -111,35 +100,35 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             width: 100%;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         .card {
-            background-color: #1f2937;
-            border: 1px solid #374151;
+            background-color: #1e293b;
+            border: 1px solid #334155;
             border-radius: 8px;
             text-align: center;
             padding: 12px 5px;
         }
-        .card:nth-child(1) { border-bottom: 3px solid #38bdf8; }
-        .card:nth-child(2) { border-bottom: 3px solid #c084fc; }
-        .card:nth-child(3) { border-bottom: 3px solid #fbbf24; }
+        .card:nth-child(1) { border-bottom: 3px solid #10b981; } /* Days */
+        .card:nth-child(2) { border-bottom: 3px solid #a855f7; } /* Months */
+        .card:nth-child(3) { border-bottom: 3px solid #0ea5e9; } /* Years */
 
         .card-val {
             font-size: 20px;
             font-weight: bold;
-            color: #38bdf8;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
-        .card:nth-child(2) .card-val { color: #c084fc; }
-        .card:nth-child(3) .card-val { color: #fbbf24; }
+        .card:nth-child(1) .card-val { color: #10b981; }
+        .card:nth-child(2) .card-val { color: #a855f7; }
+        .card:nth-child(3) .card-val { color: #0ea5e9; }
 
         .card-lbl {
             font-size: 12px;
-            color: #9ca3af;
+            color: #94a3b8;
         }
         .card-total, .card-extra {
-            background-color: #1f2937;
-            border: 1px solid #374151;
+            background-color: #1e293b;
+            border: 1px solid #334155;
             border-radius: 8px;
             width: 100%;
             text-align: center;
@@ -147,42 +136,43 @@
             margin-bottom: 12px;
             box-sizing: border-box;
         }
-        .card-total { border-right: 4px solid #34d399; }
+        .card-total { border-right: 4px solid #facc15; }
+        .card-extra { border-right: 4px solid #ec4899; }
+
         .card-total-title {
             font-size: 11px;
-            color: #9ca3af;
+            color: #94a3b8;
             margin-bottom: 4px;
         }
         .card-total-val {
             font-size: 16px;
             font-weight: bold;
-            color: #34d399;
+            color: #facc15;
         }
-        .card-extra { border-right: 4px solid #f43f5e; }
         .card-extra-val {
             font-size: 13px;
-            color: #f43f5e;
+            color: #ec4899;
             line-height: 1.6;
             white-space: pre-line;
         }
         .birthday-glow {
-            color: #fbbf24 !important;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2));
+            border: 2px solid #ec4899 !important;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+            animation: glow 1.5s infinite alternate;
+            color: #f472b6 !important;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.6), 0 0 20px rgba(244, 63, 94, 0.4);
-            animation: pulseGlow 1.5s infinite alternate;
         }
-        @keyframes pulseGlow {
-            from { transform: scale(1); text-shadow: 0 0 10px rgba(251, 191, 36, 0.6); }
-            to { transform: scale(1.02); text-shadow: 0 0 20px rgba(251, 191, 36, 0.9), 0 0 30px rgba(244, 63, 94, 0.8); }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(236, 72, 153, 0.3); }
+            to { box-shadow: 0 0 20px rgba(236, 72, 153, 0.8); }
         }
     </style>
 </head>
 <body>
-    <canvas id="confetti-canvas"></canvas>
     <div class="container">
         <div class="lbl-title">أحسب عمرك بدقة - المطور عبدالقادر</div>
         
-        <!-- حقول الإدخال مرتبة من اليمين: يوم، شهر، سنة -->
         <div class="frame-inputs">
             <div class="sub-frame">
                 <label>اليوم</label>
@@ -200,7 +190,6 @@
 
         <button class="btn-calc" onclick="calculateAge()">أبدء الحساب</button>
 
-        <!-- خانات العرض مرتبة من اليمين: أيام، أشهر، سنوات -->
         <div class="frame-results">
             <div class="card">
                 <div class="card-val" id="lbl_days_val">-</div>
@@ -221,7 +210,7 @@
             <div class="card-total-val" id="lbl_total_days_val">-</div>
         </div>
 
-        <div class="card-extra">
+        <div class="card-extra" id="card_extra_container">
             <div class="card-extra-val" id="lbl_extra_val">-</div>
         </div>
     </div>
@@ -233,48 +222,36 @@
         }
 
         function launchConfetti() {
-            const canvas = document.getElementById('confetti-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            let particles = [];
-            const colors = ['#38bdf8', '#fbbf24', '#f43f5e', '#a855f7', '#34d399', '#facc15'];
-            
-            for (let i = 0; i < 120; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 8 + 4,
-                    speedY: Math.random() * 3 + 2,
-                    speedX: Math.random() * 2 - 1,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    rotation: Math.random() * 360,
-                    rotationSpeed: Math.random() * 10 - 5
-                });
+            const colors = ['#ff79c6', '#38bdf8', '#c084fc', '#34d399', '#facc15', '#fb7185'];
+            for (let i = 0; i < 70; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = Math.random() * 8 + 6 + 'px';
+                confetti.style.height = Math.random() * 8 + 6 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.top = '-10px';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.opacity = Math.random() * 0.8 + 0.2;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                confetti.style.zIndex = '9999';
+                confetti.style.pointerEvents = 'none';
+                document.body.appendChild(confetti);
+
+                const duration = Math.random() * 3 + 2;
+                const xMovement = (Math.random() - 0.5) * 200;
+
+                confetti.style.transition = `transform ${duration}s ease-in, top ${duration}s linear, opacity ${duration}s ease-in`;
+                
+                setTimeout(() => {
+                    confetti.style.top = window.innerHeight + 50 + 'px';
+                    confetti.style.transform = `translateX(${xMovement}px) rotate(${Math.random() * 720}deg)`;
+                    confetti.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, duration * 1000 + 100);
             }
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    p.rotation += p.rotationSpeed;
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rotation * Math.PI / 180);
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-                    ctx.restore();
-                    
-                    if (p.y > canvas.height) {
-                        p.y = -20;
-                        p.x = Math.random() * canvas.width;
-                    }
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
         }
 
         function calculateAge() {
@@ -328,38 +305,36 @@
                 let py_weekday = jsDay === 0 ? 6 : jsDay - 1;
                 const birth_day_name = days_ar[py_weekday];
 
-                let next_birthday;
-                try {
-                    next_birthday = new Date(date_now.getFullYear(), date_then.getMonth(), date_then.getDate());
-                } catch(e) {
-                    next_birthday = new Date(date_now.getFullYear(), 2, 1);
-                }
+                const extraContainer = document.getElementById('card_extra_container');
+                const extraVal = document.getElementById('lbl_extra_val');
 
-                if (next_birthday < date_now) {
-                    try {
-                        next_birthday = new Date(date_now.getFullYear() + 1, date_then.getMonth(), date_then.getDate());
-                    } catch(e) {
-                        next_birthday = new Date(date_now.getFullYear() + 1, 2, 1);
-                    }
-                }
+                // Check if today is user's birthday
+                const isBirthday = (date_now.getDate() === day && (date_now.getMonth() + 1) === month);
 
-                const days_left = Math.round((next_birthday - date_now) / (1000 * 60 * 60 * 24));
-
-                let extraText = `يوم ميلادك هو: ${birth_day_name}\nباقي ليوم ميلادك: ${days_left} يوم`;
-
-                // التحقق مما إذا كان اليوم هو عيد ميلاد المستخدم
-                const isBirthday = (date_now.getDate() === date_then.getDate()) && (date_now.getMonth() === date_then.getMonth());
-                
-                const extraValElem = document.getElementById('lbl_extra_val');
                 if (isBirthday) {
+                    extraContainer.classList.add('birthday-glow');
+                    extraVal.innerHTML = "عَسَى يَوم مِيلادك يمرّ بأَلْفِ عَام<br>كُلُّ عَام وَأنت أَجمل من يكْبَر🎂🎉";
                     launchConfetti();
-                    extraValElem.className = "card-extra-val birthday-glow";
-                    extraText += `\n\nعَسَى يَوم مِيلادك يمرّ بأَلْفِ عَام\nكُلُّ عَام وَأنت أَجمل من يكْبَر🎂🎉`;
                 } else {
-                    extraValElem.className = "card-extra-val";
-                }
+                    extraContainer.classList.remove('birthday-glow');
+                    let next_birthday;
+                    try {
+                        next_birthday = new Date(date_now.getFullYear(), date_then.getMonth(), date_then.getDate());
+                    } catch(e) {
+                        next_birthday = new Date(date_now.getFullYear(), 2, 1);
+                    }
 
-                extraValElem.innerText = extraText;
+                    if (next_birthday < date_now) {
+                        try {
+                            next_birthday = new Date(date_now.getFullYear() + 1, date_then.getMonth(), date_then.getDate());
+                        } catch(e) {
+                            next_birthday = new Date(date_now.getFullYear() + 1, 2, 1);
+                        }
+                    }
+
+                    const days_left = Math.round((next_birthday - date_now) / (1000 * 60 * 60 * 24));
+                    extraVal.innerText = `يوم ميلادك هو: ${birth_day_name}\nباقي ليوم ميلادك: ${days_left} يوم`;
+                }
 
             } catch (e) {
                 alert("الرجاء إدخال أرقام صحيحة.");
