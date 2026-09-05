@@ -1,17 +1,25 @@
 {
-  "background_color": "#21344e",
-  "dir": "ltr",
-  "display": "standalone",
-  "name": "الحاسبة الذكية للعمر",
-  "orientation": "any",
-  "scope": "/",
-  "short_name": "حاسبة عبدالقادر",
-  "start_url": "/",
-  "theme_color": "#1c3656",
-  "description": "تطبيق ذكي وعصري لحساب العمر بدقة متناهية بالسنوات والأشهر والأيام، مع حساب إجمالي الأيام ومعرفة يوم الميلاد والوقت المتبقي لعيد الميلاد القادم بتصميم أنيق واحترافي.",
-  "id": "com.abdalqadr.agecalculator",
-  "categories": [
-    "lifestyle",
-    "medical"
-  ]
+    "background_color": "#0f172a",
+    "dir": "rtl",
+    "display": "standalone",
+    "name": "الحاسبة الذكية للعمر",
+    "orientation": "any",
+    "scope": "/",
+    "short_name": "حاسبة عبدالقادر ",
+    "start_url": "/",
+    "theme_color": "#0f172a",
+    "description": "تطبيق ذكي وعصري لحساب العمر بدقة متناهية بالسنوات والأشهر والأيام.",
+    "id": "com.abdulqader.agecalculator",
+    "icons": [
+        {
+            "src": "https://img.icons8.com/color/192/age.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://img.icons8.com/color/512/age.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }
