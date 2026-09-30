@@ -301,10 +301,10 @@
                 document.getElementById('lbl_days_val').innerText = days;
                 document.getElementById('lbl_total_days_val').innerText = deltaDays.toLocaleString() + " يوم";
 
-                const days_ar = ["الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد"];
-                const jsDay = date_then.getDay();
-                let py_weekday = jsDay === 0 ? 6 : jsDay - 1;
-                const birth_day_name = days_ar[py_weekday];
+                const days_ar = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+                
+                // اسم اليوم الذي ولد فيه الشخص
+                const birth_day_name = days_ar[date_then.getDay()];
 
                 const extraContainer = document.getElementById('card_extra_container');
                 const extraVal = document.getElementById('lbl_extra_val');
@@ -333,8 +333,12 @@
                         }
                     }
 
+                    // اسم اليوم لعيد الميلاد القادم
+                    const next_birthday_day_name = days_ar[next_birthday.getDay()];
+
                     const days_left = Math.round((next_birthday - date_now) / (1000 * 60 * 60 * 24));
-                    extraVal.innerText = `يوم ميلادك هو: ${birth_day_name}\nباقي ليوم ميلادك: ${days_left} يوم`;
+                    
+                    extraVal.innerText = `يوم ولادتك كان: ${birth_day_name}\nعيد ميلادك القادم يوم: ${next_birthday_day_name}\nباقي لـ عيد ميلادك: ${days_left} يوم`;
                 }
 
             } catch (e) {
